@@ -27,7 +27,7 @@ spec:
             - name: COLOR
               value: blue
             - name: ERROR_RATE
-              value: "0.50"
+              value: "0.00"
           readinessProbe:
             httpGet:
               path: /healthz
