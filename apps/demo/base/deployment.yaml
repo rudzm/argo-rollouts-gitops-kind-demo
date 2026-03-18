@@ -23,7 +23,7 @@ spec:
             - name: APP_NAME
               value: argo-rollouts-demo
             - name: VERSION
-              value: v5
+              value: v6
             - name: COLOR
               value: bluse
             - name: ERROR_RATE
