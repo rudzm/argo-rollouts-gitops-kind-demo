@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AnalysisTemplate
+metadata:
+  name: demo-success-rate
+  namespace: demo
+spec:
+  args:
+    - name: service-name
+      value: demo-metrics
+  metrics:
+    - name: success-rate
+      interval: 15s
+      count: 4
+      successCondition: result[0] >= 0.90
+      failureLimit: 1
+      provider:
+        prometheus:
+          address: http://kube-prometheus-stack-prometheus.monitoring.svc.cluster.local:9090
+          query: |
+            (
+              sum(rate(demo_requests_total{service="{{args.service-name}}",status!="500"}[1m]))
+              /
+              clamp_min(sum(rate(demo_requests_total{service="{{args.service-name}}"}[1m])), 0.001)
+            )
