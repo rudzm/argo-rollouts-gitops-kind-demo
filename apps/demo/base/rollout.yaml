@@ -49,25 +49,25 @@ spec:
             limits:
               cpu: 200m
               memory: 128Mi
-  strategy:
-    canary:
-      stableService: demo-stable
-      canaryService: demo-canary
-      scaleDownDelaySeconds: 30
-      trafficRouting:
-        plugins:
-          argoproj-labs/gatewayAPI:
-            httpRoute: demo-route
-            namespace: demo
-      steps:
-        - setWeight: 10
-        - pause: {duration: 20s}
-        - setWeight: 25
-        - pause: {duration: 20s}
-        - analysis:
-            templates:
-              - templateName: demo-success-rate
-        - setWeight: 50
-        - pause: {}
-        - setWeight: 100
-        - pause: {duration: 10s}
+  # strategy:
+  #   canary:
+  #     stableService: demo-stable
+  #     canaryService: demo-canary
+  #     scaleDownDelaySeconds: 30
+  #     trafficRouting:
+  #       plugins:
+  #         argoproj-labs/gatewayAPI:
+  #           httpRoute: demo-route
+  #           namespace: demo
+  #     steps:
+  #       - setWeight: 10
+  #       - pause: {duration: 20s}
+  #       - setWeight: 25
+  #       - pause: {duration: 20s}
+  #       - analysis:
+  #           templates:
+  #             - templateName: demo-success-rate
+  #       - setWeight: 50
+  #       - pause: {}
+  #       - setWeight: 100
+  #       - pause: {duration: 10s}
