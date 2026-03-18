@@ -20,6 +20,10 @@ spec:
       - CreateNamespace=true
       - RespectIgnoreDifferences=true
   ignoreDifferences:
+    - group: apps
+      kind: Deployment
+      jqPathExpressions:
+        - .spec.replicas
     - group: gateway.networking.k8s.io
       kind: HTTPRoute
       jqPathExpressions:
