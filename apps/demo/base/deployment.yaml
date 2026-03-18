@@ -23,11 +23,11 @@ spec:
             - name: APP_NAME
               value: argo-rollouts-demo
             - name: VERSION
-              value: v7
+              value: v1
             - name: COLOR
-              value: bluse
+              value: blue
             - name: ERROR_RATE
-              value: "0.05"
+              value: "0.00"
           readinessProbe:
             httpGet:
               path: /healthz
