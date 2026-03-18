@@ -4,7 +4,7 @@ metadata:
   name: demo-app
   namespace: demo
 spec:
-  replicas: 4
+  replicas: 10
   revisionHistoryLimit: 2
   workloadRef:
     apiVersion: apps/v1
@@ -17,26 +17,6 @@ spec:
   #     previewService: demo-canary
   #     autoPromotionEnabled: false
   #     scaleDownDelaySeconds: 30
-
-  strategy:
-    canary:
-      stableService: demo-stable
-      canaryService: demo-canary
-      scaleDownDelaySeconds: 30
-      trafficRouting:
-        plugins:
-          argoproj-labs/gatewayAPI:
-            httpRoute: demo-route
-            namespace: demo
-      steps:
-        - setWeight: 10
-        - pause: {duration: 20s}
-        - setWeight: 25
-        - pause: {}
-        - setWeight: 50
-        - pause: {}
-        - setWeight: 100
-        - pause: {}
 
   # strategy:
   #   canary:
@@ -52,11 +32,31 @@ spec:
   #       - setWeight: 10
   #       - pause: {duration: 20s}
   #       - setWeight: 25
-  #       - pause: {duration: 20s}
-  #       - analysis:
-  #           templates:
-  #             - templateName: demo-success-rate
+  #       - pause: {}
   #       - setWeight: 50
   #       - pause: {}
   #       - setWeight: 100
-  #       - pause: {duration: 10s}
+  #       - pause: {}
+
+  strategy:
+    canary:
+      stableService: demo-stable
+      canaryService: demo-canary
+      scaleDownDelaySeconds: 30
+      trafficRouting:
+        plugins:
+          argoproj-labs/gatewayAPI:
+            httpRoute: demo-route
+            namespace: demo
+      steps:
+        - setWeight: 10
+        - pause: {duration: 20s}
+        - setWeight: 25
+        - pause: {duration: 20s}
+        - analysis:
+            templates:
+              - templateName: demo-success-rate
+        - setWeight: 50
+        - pause: {}
+        - setWeight: 100
+        - pause: {duration: 10s}
