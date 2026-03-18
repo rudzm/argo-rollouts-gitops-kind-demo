@@ -10,13 +10,33 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: demo-app
+  # strategy:
+  #   blueGreen:
+  #     activeService: demo-stable
+  #     previewService: demo-canary
+  #     autoPromotionEnabled: false
+  #     scaleDownDelaySeconds: 30
+
   strategy:
-    blueGreen:
-      activeService: demo-stable
-      previewService: demo-canary
-      autoPromotionEnabled: false
+    canary:
+      stableService: demo-stable
+      canaryService: demo-canary
       scaleDownDelaySeconds: 30
-  # Alternatywa do pokazu: canary
+      trafficRouting:
+        plugins:
+          argoproj-labs/gatewayAPI:
+            httpRoute: demo-route
+            namespace: demo
+      steps:
+        - setWeight: 10
+        - pause: {duration: 20s}
+        - setWeight: 25
+        - pause: {}
+        - setWeight: 50
+        - pause: {}
+        - setWeight: 100
+        - pause: {}
+
   # strategy:
   #   canary:
   #     stableService: demo-stable
