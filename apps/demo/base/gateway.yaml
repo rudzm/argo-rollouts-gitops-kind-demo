@@ -4,8 +4,8 @@ metadata:
   name: demo-gateway
   namespace: demo
 spec:
-  # gatewayClassName: cloud-provider-kind
-  gatewayClassName: envoy-gateway-class
+  gatewayClassName: cloud-provider-kind
+  # gatewayClassName: envoy-gateway-class
   listeners:
     - name: http
       protocol: HTTP
