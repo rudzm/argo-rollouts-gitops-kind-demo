@@ -1,11 +1,8 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Rollout
+apiVersion: apps/v1
+kind: Deployment
 metadata:
   name: demo-app
-  namespace: demo
 spec:
-  replicas: 4
-  revisionHistoryLimit: 2
   selector:
     matchLabels:
       app: demo-app
@@ -49,6 +46,26 @@ spec:
             limits:
               cpu: 200m
               memory: 128Mi
+---
+# apiVersion: argoproj.io/v1alpha1
+# kind: Rollout
+# metadata:
+#   name: demo-app
+#   namespace: demo
+# spec:
+#   replicas: 4
+#   revisionHistoryLimit: 2
+#   workloadRef:
+#     apiVersion: apps/v1
+#     kind: Deployment
+#     name: demo-app
+#   strategy:
+#     blueGreen:
+#       activeService: demo-stable
+#       previewService: demo-canary
+#       autoPromotionEnabled: false
+#       scaleDownDelaySeconds: 30
+  # Alternatywa do pokazu: canary
   # strategy:
   #   canary:
   #     stableService: demo-stable
