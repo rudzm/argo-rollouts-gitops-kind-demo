@@ -25,7 +25,7 @@ spec:
             - name: VERSION
               value: v1
             - name: COLOR
-              value: green
+              value: blue
             - name: ERROR_RATE
               value: "0.00"
           readinessProbe:
