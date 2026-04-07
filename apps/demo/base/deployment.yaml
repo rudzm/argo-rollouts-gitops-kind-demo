@@ -23,9 +23,9 @@ spec:
             - name: APP_NAME
               value: argo-rollouts-demo
             - name: VERSION
-              value: v2
+              value: v3
             - name: COLOR
-              value: green
+              value: red
             - name: ERROR_RATE
               value: "0.00"
           readinessProbe:
