@@ -7,7 +7,7 @@ spec:
   parentRefs:
     - name: demo-gateway
   hostnames:
-    - demo.localtest.me
+    - demo.example.me
   rules:
     - matches:
         - path:
