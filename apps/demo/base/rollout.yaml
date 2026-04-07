@@ -52,6 +52,9 @@ spec:
       steps:
         - setWeight: 10
         - pause: {duration: 20s}
+        - analysis:
+            templates:
+              - templateName: demo-success-rate
         - setWeight: 25
         - pause: {duration: 20s}
         - analysis:
@@ -59,5 +62,8 @@ spec:
               - templateName: demo-success-rate
         - setWeight: 50
         - pause: {duration: 10s}
+        - analysis:
+            templates:
+              - templateName: demo-success-rate
         - setWeight: 100
         - pause: {duration: 10s}
