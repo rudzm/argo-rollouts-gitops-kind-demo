@@ -43,7 +43,7 @@ spec:
       stableService: demo-stable
       canaryService: demo-canary
       dynamicStableScale: true
-      scaleDownDelaySeconds: 30
+      # scaleDownDelaySeconds: 30
       trafficRouting:
         plugins:
           argoproj-labs/gatewayAPI:
